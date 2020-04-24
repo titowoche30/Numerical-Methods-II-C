@@ -1,0 +1,1 @@
+# Implementation of Newton-Cotes integration technique with polynomials of degree 1 to 4.

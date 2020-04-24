@@ -27,27 +27,13 @@ double GaussL3(double a, double b){
 }
 
 double GaussL4(double a, double b){
-    /*printf("a chegou=%f\n",a);
-    printf("b chegou=%f\n",b);
-    double dja = 5/6;
-    printf("sqrt(5/6) =%f\n",sqrt(5.0/6.0));
-    printf("sqrt(5/6)/6 =%f\n",sqrt(5/6)/6);
-    */
     double w1 = ((1.0/2.0)-(sqrt(5.0/6.0)/6));
     double w2 = (1.0/36.0)*(18+sqrt(30.0));
     double c = -(sqrt((3+(2*sqrt(6.0/5.0)))/7));
     double d = -(sqrt((3-(2*sqrt(6.0/5.0)))/7));
     double e = -d;
     double g = -c;
-    /*printf("primeira parte %f\n",((b-a)/2)*(f(X(a, b, c))*w1));
-    printf("(b-a)/2 %f\n",((b-a)/2));
-    printf("X(a, b, c) %f\n",X(a, b, c));
-    printf("f(X(a, b, c) %f\n",f(X(a, b, c)));
-    printf("f(X(a, b, c) *w1 %f\n",f(X(a, b, c))*w1);
-    printf("w1=%f",w1);
-    */
-
-
+    
     return ((b-a)/2)*(f(X(a, b, c))*w1+f(X(a, b, d))*w2+f(X(a, b, e))*w2+f(X(a, b, g))*w1);
 }
 

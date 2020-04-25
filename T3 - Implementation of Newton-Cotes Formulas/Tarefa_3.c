@@ -97,7 +97,7 @@ double integrate(short int degree,short int closed,int a,int b){
             }    
             l++;
         }
-        difference=abs(result-aux);
+        difference=fabs(result-aux);
         n++;
         printf("\niteration %d = %f\n",n,result);
     }

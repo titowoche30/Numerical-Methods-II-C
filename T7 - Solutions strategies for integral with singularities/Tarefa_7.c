@@ -10,7 +10,7 @@ double* aloc(int size){
 }
 
 double f(double x){
-    return 1/(pow((pow(x,2)),(1/3)));
+    return 1/(pow((pow(x,2)),(1.0/3.0)));
     //return 1/ (sqrt(4-pow(x,2)));
 }
 
@@ -43,7 +43,6 @@ double GaussL4(double a,double b,double lim_inf,double lim_sup,short int simples
     double g = -c;
     
     if (simples == 1){
-        //printf("retornou = %lf",((b-a)/2.0)*((exp_simples(X(a, b, c),lim_inf,lim_sup))*w1+(exp_simples(X(a, b, d),lim_inf,lim_sup))*w2+(exp_simples(X(a, b, e),lim_inf,lim_sup))*w2+(exp_simples(X(a, b, g),lim_inf,lim_sup))*w1));
         return ((b-a)/2.0)*((exp_simples(X(a, b, c),lim_inf,lim_sup))*w1+(exp_simples(X(a, b, d),lim_inf,lim_sup))*w2+(exp_simples(X(a, b, e),lim_inf,lim_sup))*w2+(exp_simples(X(a, b, g),lim_inf,lim_sup))*w1);
     }else 
         return ((b-a)/2.0)*((exp_dupla(X(a, b, c),lim_inf,lim_sup))*w1+(exp_dupla(X(a, b, d),lim_inf,lim_sup))*w2+(exp_dupla(X(a, b, e),lim_inf,lim_sup))*w2+(exp_dupla(X(a, b, g),lim_inf,lim_sup))*w1);
@@ -64,7 +63,7 @@ double * integrate(int c,double lim_inf,double lim_sup,short int flag_exp){
         intervalo[i] = i+1;
     }
     
-    double tolerance=10E-8;
+    double tolerance=10E-4;
     double result=0,result_c=0;
     double aux = 0,aux_c = 0;
     double difference=1;
@@ -83,11 +82,8 @@ double * integrate(int c,double lim_inf,double lim_sup,short int flag_exp){
             aux = result;
             result = 0;
             while(l<pow(2,n)){
-                //printf("\nl=%d\n",l);
                 result += GaussL4(a+((l*(b-a))/pow(2,n)), a+((l+1)*((b-a)/pow(2,n))),lim_inf,lim_sup,flag_exp);
-                //printf("\nresult=%lf\n",result);
-                ++l;
-                //printf("\nl saída=%d\n",l);    
+                ++l;  
                 }    
 
             difference=fabs(result-aux);

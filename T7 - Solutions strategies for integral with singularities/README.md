@@ -11,6 +11,6 @@
 
 ![alt text](comparations/double.png "Double Exponential")
 
-PS: More details on the tests, check the [spreadsheet](../comparations/comparations.ods)
+PS: More details on the tests, check the [spreadsheet](/comparations/comparations.ods)
 
  

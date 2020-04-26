@@ -11,8 +11,8 @@ double* aloc(int size){
 }
 
 double f(double x){
-    //return 1/(pow((pow(x,2)),(1.0/3.0)));
-    return 1.0/ (sqrt(4.0-pow(x,2)));
+    return 1/(pow((pow(x,2)),(1.0/3.0)));
+    //return 1.0/ (sqrt(4.0-pow(x,2)));
 }
 
 double X(double xi,double xf,double ak){
@@ -91,7 +91,7 @@ double integrate(int c,double lim_inf,double lim_sup,short int flag_exp){
         difference=fabs(result-aux);
         ++n;
         printf("\niteration %d = %f",n,result);
-       // if (n==30) break;  //Depending on the c and the function(f), you might have to use this  
+        //if (n==30) break;  //Depending on the c and the function(f), you might have to use this  
     }
     return result;
 }

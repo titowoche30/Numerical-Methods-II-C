@@ -19,6 +19,7 @@ void printMf(double* vetor,int n,int esp){
     printf("\n");
 }
 
+//Produto interno de 2 vetores
 double vecVec(double* vector1, double* vector2,int m,int n){
     //m = linhas do 1,n = linhas do 2
 
@@ -44,7 +45,10 @@ double* matVec(double* matrix,double* vetor,int m,int n,int p){
     return b;
 }
 
+//Norma-2 de vetor
 double norm(double* vector,int n){
+    //vetor, tamanho
+
     double norm_ = 0;
 
     for(int i = 0; i < n; i++)
@@ -53,7 +57,9 @@ double norm(double* vector,int n){
     return sqrt(norm_);
 }
 
+//Divisao de vetor(ou matriz) por escalar
 double* vectorDiv(double* vector,double scaler,int l){
+     //vetor,escalar,tamanho
     double* new_vector = aloc(l);
 
     for (int i = 0; i < l; i++)
@@ -62,44 +68,49 @@ double* vectorDiv(double* vector,double scaler,int l){
     return new_vector;
 }
 
-double* potenciaRegular(double* A,int l, double* valor){
+//Método da potencia para calculo de autovalores e autovetores
+void potenciaRegular(double* A,int l, double* valor,double *vetor){
+    //Matriz,num de linhas(ou col), variaveis que vão ser armazenados os auto
+    
     double* v = aloc(l);
-    double* vetor = aloc(l);
+    double* aux = aloc(l);
+ //   printf("Endereço do vetor que chegou = %p \n",vetor);
 
-    for (int i = 0; i < l; i++)
-        v[i] = 1;
+    for (int i = 0; i < l; i++) v[i] = 1;
     
     double tolerancia = 1.E-10;
     double lambda = 0, lambda_velho = 0, dif = 1;
     
-
     while (dif > tolerancia){
         lambda_velho = lambda;
-        vetor = vectorDiv(v,norm(v,l),l);
+      //  vetor = vectorDiv(v,norm(v,l),l);
+        aux = vectorDiv(v,norm(v,l),l);
+        for (int i = 0; i < l; i++)                 //Pra n mudar o endereço do vetor
+            vetor[i] = aux[i];
+    //    printf("Endereço do vetor no laco = %p \n",vetor);
         v = matVec(A,vetor,l,l,l);
         lambda = vecVec(vetor,v,l,l);
         dif = fabs((lambda - lambda_velho)/lambda);
     }
 
-    valor[0] = lambda;
-    return vetor;
+    *valor = lambda;                                //Value no endereço de valor agora é lambda
 }
 
 int main (){
     double matriz1[9] = {5.,2.,1.,2.,3.,1.,1.,1.,2.};
     double matriz2[9] = {-14.,1.,-2.,1.,-1.,1.,-2.,1.,-11.};
     double matriz3[25] = {40.,8.,4.,2.,1.,8.,30.,12.,6.,2.,4.,12.,20.,1.,2.,2.,6.,1.,25.,4.,1.,2.,2.,4.,5.};
-
-    int l = 25;
+    int l = (int) sizeof(matriz3)/sizeof(matriz3[0]);
     int n = sqrt(l);
 
-    double* vetor = aloc(n);
-    double* valor = aloc(1);
-    vetor = potencia_regular(matriz3,n,valor);
+    double* auto_vetor = aloc(n);
+    double* auto_valor = aloc(1);
+
+    potenciaRegular(matriz3,n,auto_valor,auto_vetor);
     printf("Autovetor \n");
-    printMf(vetor,n,1);
+    printMf(auto_vetor,n,1);
     printf("Autovalor \n");
-    printf("%f \n",valor[0]);
+    printf("%f \n",*auto_valor);
 
     return 0;
 }
